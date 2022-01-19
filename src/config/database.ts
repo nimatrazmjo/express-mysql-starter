@@ -1,13 +1,14 @@
 import { createConnection } from "typeorm";
-import DatabaseConnectionError from "../errors/database-connection.error";
 
-async function connectionToDB() {
+async function connectionToDB(connection: string = 'default') {
   try {
-    await createConnection();
-    console.log('successfully connected to database')
+    await createConnection(connection);
+    console.log('successfully connected to database',connection)
     
   } catch (error:any) {
-      throw new DatabaseConnectionError(error.message)
+    console.log(error);
+    
+      // throw new DatabaseConnectionError(error.message)
   }
 }
 

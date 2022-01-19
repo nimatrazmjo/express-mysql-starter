@@ -1,9 +1,8 @@
-import { Request, Response, Router } from "express";
+import express from 'express';
+import { AuthRouter } from './auth.route';
 
-const router = Router(); 
+const app = express()
 
-router.get('/',(req: Request, res: Response)=> {
-  res.send('Hello Hello')
-});
+app.use('/auth', AuthRouter)
 
-export { router as routers };
+export { app as routers };

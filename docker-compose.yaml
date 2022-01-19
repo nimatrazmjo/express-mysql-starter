@@ -4,19 +4,12 @@ services:
     build: .
     ports:
       - 8000:8000
-    volumes:
-      - .:/app
-      # - .logs:/var/log
-      - /node_modules
     depends_on:
       - db
   db:
     # platform: linux/x86_64  // if you are using on Mac M1 Chip
     image: mysql:8
     restart: always
-    environment:
-      MYSQL_DATABASE: test
-      MYSQL_ROOT_PASSWORD: root
     volumes:
       - .dbdata:/var/lib/mysql
     ports:

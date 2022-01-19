@@ -12,7 +12,7 @@ app.use(cors({}))
 app.use(json());
 
 // Routes
-app.use(routers);
+app.use('/api',routers);
 
 //not found
 app.all("*", notFoundMiddleware)
