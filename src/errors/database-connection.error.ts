@@ -6,8 +6,8 @@ class DatabaseConnectionError extends CustomError {
   constructor(message?: string) {
     super(message)
   }
-  serializeError(): ErrorResponse {
-      return {message:this.message}
+  serializeError(): ErrorResponse[] {
+      return [{message:this.message}]
   }
 }
 

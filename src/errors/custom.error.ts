@@ -6,5 +6,5 @@ export abstract class CustomError extends Error {
     super(message)
   }
 
-  abstract serializeError(): ErrorResponse
+  abstract serializeError(): ErrorResponse[]
 }

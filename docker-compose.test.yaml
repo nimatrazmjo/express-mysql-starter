@@ -5,9 +5,6 @@ services:
     container_name: backend-test
     command: sh -c "npm install && npm test"
     tty: true
-    volumes:
-      - .:/app
-      - /node_modules
   db:
     container_name: db-test
     tty: true

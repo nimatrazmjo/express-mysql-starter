@@ -3,7 +3,7 @@ version: '3.9'
 services:
   backend:
     container_name: backend-dev
-    command: npm test
+    command: npm run dev
     tty: true
     volumes:
       - .:/app
