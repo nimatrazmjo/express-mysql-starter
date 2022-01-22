@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { body } from "express-validator";
+import { duplicateEmailMiddleware } from "../middlewares/duplicate-email.middleware";
 import { AuthRegisterController } from "../controllers/auth.controller";
 import { validateRequest } from "../middlewares/validation.middleware";
 const router = Router();
@@ -14,6 +15,7 @@ router.post(
     
   ],
   validateRequest,
+  duplicateEmailMiddleware,
   AuthRegisterController
 );
 

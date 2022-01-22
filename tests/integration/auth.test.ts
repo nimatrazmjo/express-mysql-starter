@@ -22,12 +22,17 @@ describe("POST /api/auth/register", () => {
     expect(response.body[0].message).toBe('Email must be valid');
   });
 
-  it("Should not return 400 if provided email already exists", async () => {
+  it("Should not return 422 if provided email already exists", async () => {
     const userMock = { ...UserMock} 
-    const response = await request(app)
+    await request(app)
     .post(REGISTER_API)
     .send(userMock)
     .expect(201);
+
+    const response = await request(app)
+    .post(REGISTER_API)
+    .send(userMock)
+    .expect(422);
   });
   it("Should  return 201 if the user successfully created", async () => {
     const response = await request(app)
