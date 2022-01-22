@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { body } from "express-validator";
 import { duplicateEmailMiddleware } from "../middlewares/duplicate-email.middleware";
-import { AuthRegisterController } from "../controllers/auth.controller";
+import { authRegisterController, loginCongroller } from "../controllers/auth.controller";
 import { validateRequest } from "../middlewares/validation.middleware";
 const router = Router();
 
@@ -16,7 +16,19 @@ router.post(
   ],
   validateRequest,
   duplicateEmailMiddleware,
-  AuthRegisterController
+  authRegisterController
 );
+
+router.post(
+  "/login",
+  [
+    body("email").trim().isEmail().withMessage("Email must be valid"),
+    body("password").trim().trim().notEmpty().withMessage("Password must be provide"),
+  ],
+  validateRequest,
+  loginCongroller
+);
+
+
 
 export { router as AuthRouter };

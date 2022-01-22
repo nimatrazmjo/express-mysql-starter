@@ -13,7 +13,7 @@ export const duplicateEmailMiddleware = async (req: Request, res: Response, next
   console.log(userExists, 'User existsss');
   
   if (userExists > 0) {
-    return next(new RequestValidationError([{msg: 'Email already exist', param: 'email', nestedErrors: [], value: '', location: 'body'}]));
+   throw new RequestValidationError([{msg: 'Email already exist', param: 'email', nestedErrors: [], value: '', location: 'body'}]);
   }
   next()
 }
