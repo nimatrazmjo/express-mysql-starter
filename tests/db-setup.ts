@@ -7,7 +7,6 @@ require("tsconfig-paths/register")
 import "dotenv/config"
 import { connectionToDB } from "src/config/database"
 import { ConnectionOptions } from "typeorm"
-import { ORMConfig } from "../src/config/ormconfig"
 
 /*
  * This file is executed by Jest before running any tests.

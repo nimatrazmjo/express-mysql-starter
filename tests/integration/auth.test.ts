@@ -21,22 +21,13 @@ describe("POST /api/auth/register", () => {
     expect(response.body[0].field).toBe('email')
     expect(response.body[0].message).toBe('Email must be valid');
   });
-  // it("Should not return 400 if provided password and confirm password does not match", async () => {
-  //   const userMock = { ...UserMock} 
-  //   const response = await request(app)
-  //   .post(REGISTER_API)
-  //   .send(userMock)
-  //   .expect(422);
-  // expect(response.body[0].field).toBe('email')
-  // expect(response.body[0].message).toBe('Email must be valid')
-  // });
+
   it("Should not return 400 if provided email already exists", async () => {
     const userMock = { ...UserMock} 
     const response = await request(app)
     .post(REGISTER_API)
     .send(userMock)
-    .expect(422);
-  expect(response.body[0].message).toBe('Email must be valid')
+    .expect(201);
   });
   it("Should  return 201 if the user successfully created", async () => {
     const response = await request(app)

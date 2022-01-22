@@ -2,24 +2,24 @@ import { getConnection } from "typeorm";
 import { app } from "../src/app";
 import { connectionToDB } from "../src/config/database";
 let connection;
-const CONNECTION_TYPE= 'test';
 beforeAll(async () => {
-  await connectionToDB(CONNECTION_TYPE);
-  connection = getConnection(CONNECTION_TYPE);
+  process.env.TYPEORM_DATABASE = 'ambassador_test';
+  await connectionToDB();
+  connection = getConnection();
   console.log('database connected');
   
   
 });
 
 beforeEach(async () => {
-  const entities = getConnection(CONNECTION_TYPE).entityMetadatas;
+  const entities = getConnection().entityMetadatas;
 
   for (const entity of entities) {
-      const repository = getConnection(CONNECTION_TYPE).getRepository(entity.name); // Get repository
+      const repository = getConnection().getRepository(entity.name); // Get repository
       await repository.clear(); // Clear each entity table's content
   }
 });
 afterAll(async () => {
-  await connection.close();
+  await getConnection().close();
   console.log('database disconnected');
 });

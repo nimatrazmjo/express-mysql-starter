@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { User } from "../entity/user.entity";
-import { IUser } from "src/interfaces/user.interface";
+import { IUser } from "../interfaces/user.interface";
 import { getConnection, getRepository } from "typeorm";
 import bcryptjs from 'bcryptjs';
 

@@ -1,4 +1,4 @@
-import { IUser } from "src/interfaces/user.interface";
+import { IUser } from "../../src/interfaces/user.interface";
 
 export const UserMock: IUser = {
   first_name: 'nimat',
