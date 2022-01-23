@@ -2,9 +2,12 @@ import request from "supertest";
 import { UserMock } from "../mocks/user.mock";
 
 import { app } from "../../src/app";
+import { signUpAndReturnCookie } from "../unit/get-auth-cookie";
 
 const REGISTER_API = "/api/auth/register";
-const LOGIN_API = '/api/auth/login'
+const LOGIN_API = '/api/auth/login';
+const CURRENT_USER_API = '/api/auth/current-user';
+const LOGOUT_API = '/api/auth/logout';
 
 describe("POST /api/auth/register", () => {
   
@@ -93,10 +96,52 @@ describe("POST /api/auth/login", () => {
       .send(UserMock)
       .expect(201);
 
-      await request(app)
+      const response = await request(app)
       .post(LOGIN_API)
       .send({email, password})
-      .expect(200);
+      .expect(200);    
   });
+});
+
+describe('GET /api/auth/current-user',()=>{
+  it('should response with details about the current user', async ()=>{
+      const cookie = await signUpAndReturnCookie();
+      const response = await request(app)
+        .get(CURRENT_USER_API)
+        .set('Cookie', cookie)
+        .expect(200);
+        
+      expect(response.body.currentUser.email).toEqual(UserMock.email)
+  });
+
+  it('should return null for un authenticated user',async () => {
+    const response = await request(app)
+      .get(CURRENT_USER_API)
+      .send({})
+      .expect(401);
+
+      expect(response.body.currentUser).toBe(undefined);
+  });
+});
+
+describe(" POST /api/auth/logout", () => {
+  const { email, password } = UserMock;
+  it('should delete jwt from session',async () => {
+    await request(app)
+      .post(REGISTER_API)
+      .send(UserMock).expect(201);
+  
+    await request(app)
+      .post(LOGIN_API)
+      .send({email, password}).expect(200);
+  
+    const response = await request(app)
+      .post(LOGOUT_API)
+      .send({})
+      .expect(200)
+
+    // expect(response.get('Set-Cookie')[0]).toEqual('session=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; httponly')
+  });
+
 });
 

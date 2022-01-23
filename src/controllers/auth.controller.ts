@@ -3,7 +3,7 @@ import { User } from "../entity/user.entity";
 import { getConnection, getRepository } from "typeorm";
 import bcryptjs from "bcryptjs";
 import BadRequestError from "../errors/bad-request.error";
-import { sign } from "jsonwebtoken";
+import { generateToken } from "../utils/jwt";
 
 const authRegisterController = async (req: Request, res: Response) => {
   const { first_name, last_name, email, password: userPassword } = req.body;
@@ -31,16 +31,30 @@ const loginCongroller = async (req: Request, res: Response) => {
     throw new BadRequestError("Invalid Credentials");
   }
 
-  const token = sign(
-    {
-      id: user.id,
-    },
-    process.env.SECRET_KEY
-  );
-  res.cookie("jwt", token, {
-    httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000, //1 day
+  const token = generateToken({
+    id: user.id,
+    email: user.email,
   });
-  res.status(200).json({message:'ok'});
+  req.session = {
+    jwt: token,
+  };
+  res.status(200).json({ message: "ok" });
 };
-export { authRegisterController, loginCongroller };
+
+const currentUserController = async (req: Request, res: Response) => {
+  console.log(req.currentUser,'current user');
+  
+  res.send({currentUser:req.currentUser});
+};
+const logoutController = async (req: Request, res: Response) => {
+  req.session = null;
+  res.send({});
+  res.status(200).json({ message: "ok" });
+};
+
+export {
+  authRegisterController,
+  loginCongroller,
+  currentUserController,
+  logoutController,
+};
