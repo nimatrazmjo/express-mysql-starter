@@ -1,11 +1,12 @@
 {
-  "name": "ambassador",
+  "name": "express-mysql-starter",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.ts",
     "test": "jest --watchAll --no-cache",
+    "ddocker:dev": "docker-compose up",
     "docker:test": "docker-compose -f docker-compose.yaml -f docker-compose.test.yaml up"
   },
   "keywords": [],
