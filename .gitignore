@@ -1,3 +1,4 @@
 .dbdata
 node_modules
 coverage
+ormconfig.env

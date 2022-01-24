@@ -44,7 +44,6 @@ router.post(
 
 router.get(
   "/current-user",
-  authenticatedMiddleware,
   currentUserMiddleware,
   currentUserController
 );
