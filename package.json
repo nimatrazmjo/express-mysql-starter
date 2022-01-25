@@ -7,7 +7,8 @@
     "dev": "nodemon index.ts",
     "test": "jest --watchAll --no-cache",
     "ddocker:dev": "docker-compose up",
-    "docker:test": "docker-compose -f docker-compose.yaml -f docker-compose.test.yaml up"
+    "docker:test": "docker-compose -f docker-compose.yaml -f docker-compose.test.yaml up",
+    "seed:orders": "ts-node src/seeders/order.seeder.ts"
   },
   "keywords": [],
   "author": "",
@@ -37,7 +38,6 @@
     "express": "^4.17.2",
     "express-async-errors": "^3.1.1",
     "express-validator": "^6.14.0",
-    "faker": "^6.6.6",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
     "reflect-metadata": "^0.1.13",
