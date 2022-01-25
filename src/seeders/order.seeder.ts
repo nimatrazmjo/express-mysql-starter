@@ -19,7 +19,7 @@ connectionToDB().then(async () => {
     //   complete: true,
     // });
 
-    // for (let j = 0; i < randomInt(1,5); j++) {
+    // for (let j = 0; j < randomInt(1,5); j++) {
     //   await orderItemRepository.save({
     //     order,
     //     product_title: faker.lorem.words(2),

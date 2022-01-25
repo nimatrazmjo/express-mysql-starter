@@ -1,4 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Link } from "./link.entity";
 import { OrderItem } from "./order-item.entity";
 import { Product } from "./product.entity";
 import { User } from "./user.entity";
@@ -51,6 +52,15 @@ export class Order {
 
   @OneToMany(()=> OrderItem, orderItem=> orderItem.order)
   order_items: OrderItem[]
+
+  @ManyToOne(()=> Link, link => link.orders, {
+    createForeignKeyConstraints: false
+  })
+  @JoinColumn({
+    referencedColumnName: 'code',
+    name: 'code'
+  })
+  link: Link;
 
   get name(): string {
     return this.first_name + ' ' + this.last_name;
