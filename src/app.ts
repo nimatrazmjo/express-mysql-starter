@@ -13,7 +13,9 @@ const app = express();
 
 
 // initial configuration
-app.use(cors({}))
+app.use(cors({
+  origin: ['http://localhost:4200']
+}))
 app.use(json());
 app.use(cookieSession(
   {

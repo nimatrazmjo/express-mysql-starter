@@ -42,9 +42,8 @@ const loginCongroller = async (req: Request, res: Response) => {
 };
 
 const currentUserController = async (req: Request, res: Response) => {
-  console.log(req.currentUser,'current user');
-  
-  res.send({currentUser:req.currentUser});
+  const { password, ...user } = await getRepository(User).findOne(req.currentUser.id)
+  res.send(user);
 };
 const logoutController = async (req: Request, res: Response) => {
   req.session = null;
