@@ -1,3 +1,4 @@
+import { currentUserMiddleware } from "./../middlewares/current-user.middleware";
 import { Router } from "express";
 import { body } from "express-validator";
 import { duplicateEmailMiddleware } from "../middlewares/duplicate-email.middleware";
@@ -6,10 +7,10 @@ import {
   currentUserController,
   loginCongroller,
   logoutController,
+  updatProfileController,
+  changePasswordController,
 } from "../controllers/auth.controller";
 import { validateRequest } from "../middlewares/validation.middleware";
-import { authenticatedMiddleware } from "../middlewares/authenticated-route.middleware";
-import { currentUserMiddleware } from "../middlewares/current-user.middleware";
 const router = Router();
 
 router.post(
@@ -42,12 +43,11 @@ router.post(
   loginCongroller
 );
 
-router.get(
-  "/current-user",
-  currentUserMiddleware,
-  currentUserController
-);
+router.get("/current-user", currentUserMiddleware, currentUserController);
 
 router.post("/logout", logoutController);
+
+router.put("/profile", currentUserMiddleware, updatProfileController);
+router.put("/change-password", currentUserMiddleware, updatProfileController);
 
 export { router as AuthRouter };

@@ -47,13 +47,39 @@ const currentUserController = async (req: Request, res: Response) => {
 };
 const logoutController = async (req: Request, res: Response) => {
   req.session = null;
-  res.send({});
+ 
   res.status(200).json({ message: "ok" });
 };
+
+
+const updatProfileController = async (req: Request, res: Response) => {
+  const repository = getRepository(User);
+
+  await repository.update(req.currentUser.id, req.body);
+  
+  res.status(200).json(await repository.findOne(req.currentUser.id));
+};
+
+const changePasswordController = async (req: Request, res: Response) => {
+  const repository = getRepository(User);
+  const  { password, confirm_password} = req.body;
+
+  if (password !== confirm_password) {
+    throw new BadRequestError('Password don not match!');
+  }
+
+  await repository.update(req.currentUser.id, {
+    password: await bcryptjs.hash(password,10)
+  });
+  res.send({message: "ok"})
+};
+
 
 export {
   authRegisterController,
   loginCongroller,
   currentUserController,
   logoutController,
+  updatProfileController,
+  changePasswordController
 };
