@@ -1,6 +1,6 @@
 import express from 'express';
 import { authenticatedMiddleware } from '../middlewares/authenticated-route.middleware';
-import { ambassadorRoutes } from './ambassador.route';
+import { ambassadorRoutes } from './user.route';
 import { AuthRouter } from './auth.route';
 import { orderRoutes } from './order.route';
 import { productRoutes } from './product.route';

@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { ambassadorListController } from "../controllers/ambassador.controller";
 import { linksController } from "../controllers/link.controller";
+import { lists } from "../controllers/user.controller";
 const router = Router();
 
 router.get(
-  "/ambassadors/list",
-  ambassadorListController
+  "/",
+  lists
 );
 
 router.get(
