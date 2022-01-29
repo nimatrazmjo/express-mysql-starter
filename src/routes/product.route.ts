@@ -7,7 +7,7 @@ router.post(
   createProductController
 );
 router.get(
-  "/list",
+  "/",
   productsListController
 );
 router.get(

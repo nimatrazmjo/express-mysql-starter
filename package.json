@@ -10,7 +10,8 @@
     "docker:test": "docker-compose -f docker-compose.yaml -f docker-compose.test.yaml up",
     "seed:orders": "ts-node src/seeders/order.seeder.ts",
     "seed:users": "ts-node src/seeders/user.seeder.ts",
-    "seed:links": "ts-node src/seeders/link.seeder.ts"
+    "seed:links": "ts-node src/seeders/link.seeder.ts",
+    "seed:products": "ts-node src/seeders/product.seeder.ts"
   },
   "keywords": [],
   "author": "",

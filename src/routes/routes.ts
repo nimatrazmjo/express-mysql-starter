@@ -9,7 +9,7 @@ const app = express()
 
 app.use('/auth', authenticatedMiddleware, AuthRouter);
 app.use('/users', authenticatedMiddleware, userRoutes);
-app.use('/users/products', productRoutes);
+app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
 
 
