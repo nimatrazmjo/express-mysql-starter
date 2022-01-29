@@ -8,12 +8,14 @@
     "test": "jest --watchAll --no-cache",
     "ddocker:dev": "docker-compose up",
     "docker:test": "docker-compose -f docker-compose.yaml -f docker-compose.test.yaml up",
-    "seed:orders": "ts-node src/seeders/order.seeder.ts"
+    "seed:orders": "ts-node src/seeders/order.seeder.ts",
+    "seed:users": "ts-node src/seeders/user.seeder.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@faker-js/faker": "^6.0.0-alpha.5",
     "@types/bcryptjs": "^2.4.2",
     "@types/cookie-session": "^2.0.44",
     "@types/cors": "^2.8.12",
