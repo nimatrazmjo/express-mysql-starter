@@ -1,4 +1,14 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { Link } from "./link.entity";
 import { OrderItem } from "./order-item.entity";
 import { Product } from "./product.entity";
@@ -9,7 +19,7 @@ export class Order {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   transaction_id: string;
 
   @Column()
@@ -17,11 +27,10 @@ export class Order {
 
   @Column()
   code: string;
-  
+
   @Column()
   ambassador_email: string;
 
-  
   @Column()
   first_name: string;
 
@@ -31,42 +40,45 @@ export class Order {
   @Column()
   email: string;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   address: string;
-  
-  @Column({nullable: true})
+
+  @Column({ nullable: true })
   country: string;
-  
-  @Column({nullable: true})
+
+  @Column({ nullable: true })
   city: string;
-  
-  @Column({nullable: true})
+
+  @Column({ nullable: true })
   zip: string;
 
-  @Column({default: false})
+  @Column({ default: false })
   complete: boolean;
 
-   
   @CreateDateColumn()
   createdAt: string;
 
-  @OneToMany(()=> OrderItem, orderItem=> orderItem.order)
-  order_items: OrderItem[]
+  @OneToMany(() => OrderItem, (orderItem) => orderItem.order)
+  order_items: OrderItem[];
 
-  @ManyToOne(()=> Link, link => link.orders, {
-    createForeignKeyConstraints: false
+  @ManyToOne(() => Link, (link) => link.orders, {
+    createForeignKeyConstraints: false,
   })
   @JoinColumn({
-    referencedColumnName: 'code',
-    name: 'code'
+    referencedColumnName: "code",
+    name: "code",
   })
   link: Link;
 
   get name(): string {
-    return this.first_name + ' ' + this.last_name;
+    return this.first_name + " " + this.last_name;
   }
 
   get total(): number {
-    return this.order_items.reduce((s,item)=>s + item.admin_revenue,0)
+    return this.order_items.reduce((s, item) => s + item.admin_revenue, 0);
+  }
+
+  get ambassador_revenue(): number {
+    return this.order_items.reduce((s, item) => s + item.ambassador_revenue, 0);
   }
 }

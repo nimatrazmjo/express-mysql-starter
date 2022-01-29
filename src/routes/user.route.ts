@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { linksController } from "../controllers/link.controller";
+import { createLinkController, linksController, statsController } from "../controllers/link.controller";
 import { lists } from "../controllers/user.controller";
 const router = Router();
 
@@ -13,5 +13,12 @@ router.get(
   linksController
 );
 
+router.post(
+  "/links/create",
+  createLinkController
+);
 
-export { router as ambassadorRoutes };
+router.get("/links/status", statsController)
+
+
+export { router as userRoutes };
