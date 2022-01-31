@@ -56,7 +56,7 @@ export class Order {
   complete: boolean;
 
   @CreateDateColumn()
-  createdAt: string;
+  created_at: string;
 
   @OneToMany(() => OrderItem, (orderItem) => orderItem.order)
   order_items: OrderItem[];
